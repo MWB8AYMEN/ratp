@@ -1,148 +1,115 @@
 <?php
-namespace App\Entity;
+namespace App\ValueObject\Import;
 
-use Doctrine\ORM\Mapping as ORM;
-
-/**
- * @ORM\Entity()
- */
-class Location
+class Location implements LocationInterface
 {
     /**
-     * @var int
-     *
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     * @ORM\Column(type="integer")
-     */
-    protected $id;
-
-    /**
      * @var string
-     *
-     * @ORM\Column(type="string")
      */
     protected $geoPoint;
 
     /**
      * @var array
-     *
-     * @ORM\Column(type="array")
      */
     protected $geoShape;
 
     /**
      * @var float
      *
-     * @ORM\Column(type="array")
-     *
      */
     protected $objectId;
 
     /**
      * @var int
-     *
-     * @ORM\Column(type="integer")
      */
     protected $idRefZdl;
 
     /**
      * @var int
-     *
-     * @ORM\Column(type="integer")
      */
     protected $garesId;
 
     /**
      * @var string
-     *
-     * @ORM\Column(type="string")
      */
     protected $nomGare;
 
     /**
      * @var string
-     *
-     * @ORM\Column(type="string")
      */
     protected $nomlong;
 
     /**
      * @var string
-     *
-     * @ORM\Column(type="string")
      */
     protected $nomIv;
 
     /**
      * @var string
-     *
-     * @ORM\Column(type="string")
      */
     protected $numMod;
 
     /**
      * @var int
-     *
-     * @ORM\Column(type="integer")
      */
     protected $mode;
 
     /**
      * @var string
-     *
-     * @ORM\Column(type="string")
      */
     protected $fer;
 
     /**
      * @var int
-     *
-     * @ORM\Column(type="integer")
      */
     protected $train;
 
     /**
      * @var int
-     *
-     * @ORM\Column(type="integer")
      */
     protected $rer;
 
     /**
      * @var int
-     *
-     * @ORM\Column(type="integer")
      */
     protected $metro;
 
     /**
      * @var int
-     *
-     * @ORM\Column(type="integer")
      */
     protected $tramway;
 
     /**
      * @var int
-     *
-     * @ORM\Column(type="integer")
      */
     protected $navette;
 
     /**
      * @var int
-     *
-     * @ORM\Column(type="integer")
      */
     protected $val;
 
-    /**
-     * @return int
-     */
-    public function getId(): int
+    public function __construct(array $row)
     {
-        return $this->id;
+        [
+            $this->geoPoint,
+            $this->geoShape,
+            $this->objectId,
+            $this->idRefZdl,
+            $this->garesId,
+            $this->nomGare,
+            $this->nomlong,
+            $this->nomIv,
+            $this->numMod,
+            $this->mode,
+            $this->fer,
+            $this->train,
+            $this->rer,
+            $this->metro,
+            $this->tramway,
+            $this->navette,
+            $this->val
+        ] = $row;
     }
 
     /**
@@ -264,7 +231,7 @@ class Location
     /**
      * @param string $nomlong
      *
-     * @return self|$this
+     * @return \App\Entity\Location|$this
      */
     public function setNomlong($nomlong)
     {
@@ -474,8 +441,3 @@ class Location
     }
 
 }
-
-
-
-
-

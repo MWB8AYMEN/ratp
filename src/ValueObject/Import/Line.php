@@ -1,76 +1,48 @@
 <?php
-namespace App\Entity;
+namespace App\ValueObject\Import;
 
-use Doctrine\ORM\Mapping as ORM;
-
-/**
- * @ORM\Entity()
- */
-class Line
+class Line implements  LineInterface
 {
     /**
      * @var int
-     *
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     * @ORM\Column(type="integer")
-     */
-    protected $id;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="idrefliga",type="integer")
      */
     protected $idRefLiga;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="idrefligc", type="string", nullable=true)
      */
     protected $idRefLigc;
 
     /**
      * @var string
-     *
-     * @ORM\Column(type="string")
      */
     protected $ligne;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="codligf", type="string")
      */
     protected $codLigf;
 
     /**
      * @var int
-     *
-     * @ORM\Column(type="integer")
      */
     protected $ligneCode;
 
     /**
      * @var string
-     *
-     * @ORM\Column(type="string")
      */
     protected $indiceLig;
 
-    /**
-     * @ORM\OneToOne(targetEntity="\App\Entity\Location", mappedBy="location")
-     * @ORM\JoinColumn(name="location_id", referencedColumnName="id", nullable=false)
-     */
-    protected $location;
-
-    /**
-     * @return int
-     */
-    public function getId()
+    public function __construct(array $row)
     {
-        return $this->id;
+        [
+            $this->idRefLiga,
+            $this->idRefLigc,
+            $this->ligne,
+            $this->codLigf,
+            $this->ligneCode,
+            $this->indiceLig
+        ] = $row;
     }
 
     /**
@@ -92,6 +64,7 @@ class Line
 
         return $this;
     }
+
 
     /**
      * @return string
@@ -193,24 +166,4 @@ class Line
         return $this;
     }
 
-    /**
-     * @return Location
-     */
-    public function getLocation()
-    {
-        return $this->location;
-    }
-
-    /**
-     * @param Location $location
-     *
-     * @return self|$this
-     */
-    public function setLocation(Location $location)
-    {
-        $this->location = $location;
-
-        return $this;
-    }
 }
-

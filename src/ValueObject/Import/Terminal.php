@@ -1,83 +1,53 @@
 <?php
-namespace App\Entity;
+namespace App\ValueObject\Import;
 
-use Doctrine\ORM\Mapping as ORM;
-
-/**
- * @ORM\Entity()
- */
-class Terminal
+class Terminal implements TerminalInterface
 {
     /**
      * @var int
-     *
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     * @ORM\Column(type="integer")
-     */
-    protected $id;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(type="integer")
      */
     protected $terfer;
 
     /**
      * @var int
-     *
-     * @ORM\Column(type="integer")
      */
     protected $tertrain;
 
     /**
      * @var int
-     *
-     * @ORM\Column(type="integer")
      */
     protected $terrer;
 
     /**
      * @var int
-     *
-     * @ORM\Column(type="integer")
      */
     protected $termetro;
 
     /**
      * @var string
-     *
-     * @ORM\Column(type="string")
      */
     protected $tertram;
 
     /**
      * @var int
-     *
-     * @ORM\Column(type="integer")
      */
     protected $ternavette;
 
     /**
      * @var int
-     *
-     * @ORM\Column(type="integer", nullable=true)
      */
     protected $terval;
 
-    /**
-     * @ORM\OneToOne(targetEntity="\App\Entity\Location", mappedBy="location")
-     * @ORM\JoinColumn(name="location_id", referencedColumnName="id", nullable=false)
-     */
-    protected $location;
-
-    /**
-     * @return int
-     */
-    public function getId()
+    public function __construct(array $row)
     {
-        return $this->id;
+        [
+            $this->terfer,
+            $this->tertrain,
+            $this->terrer,
+            $this->termetro,
+            $this->tertram,
+            $this->ternavette
+        ] = $row;
     }
 
     /**
@@ -220,23 +190,4 @@ class Terminal
         return $this;
     }
 
-    /**
-     * @return Location
-     */
-    public function getLocation()
-    {
-        return $this->location;
-    }
-
-    /**
-     * @param Location $location
-     *
-     * @return self|$this
-     */
-    public function setLocation(Location $location)
-    {
-        $this->location = $location;
-
-        return $this;
-    }
 }

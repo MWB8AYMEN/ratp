@@ -1,104 +1,72 @@
 <?php
-namespace App\Entity;
+namespace App\ValueObject\Import;
 
-use Doctrine\ORM\Mapping as ORM;
-
-/**
- * @ORM\Entity()
- */
-class Network
+class Network implements NetworkInterface
 {
     /**
-     * @var int
-     *
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     * @ORM\Column(type="integer")
-     */
-    protected $id;
-
-    /**
      * @var string
-     *
-     * @ORM\Column(type="string")
      */
     protected $network;
 
     /**
      * @var string
-     *
-     * @ORM\Column(type="string")
      */
     protected $resCom;
 
     /**
      * @var string
-     *
-     * @ORM\Column(type="string")
      */
     protected $codResf;
 
     /**
      * @var int
-     *
-     * @ORM\Column(type="integer")
      */
     protected $resStif;
 
     /**
      * @var int
-     *
-     * @ORM\Column(type="integer")
      */
     protected $exploitant;
 
     /**
      * @var string
-     *
-     * @ORM\Column(type="string")
      */
     protected $numPsr;
 
     /**
      * @var int
-     *
-     * @ORM\Column(type="integer")
      */
     protected $idf;
 
     /**
      * @var int
-     *
-     * @ORM\Column(type="integer")
      */
     protected $principal;
 
     /**
      * @var float
-     *
-     * @ORM\Column(type="float")
      */
     protected $absc;
 
     /**
      * @var float
-     *
-     * @ORM\Column(type="float")
      */
     protected $ord;
 
-    /**
-     * @ORM\OneToOne(targetEntity="\App\Entity\Location", mappedBy="location")
-     * @ORM\JoinColumn(name="location_id", referencedColumnName="id", nullable=false)
-     */
-    protected $location;
-
-    /**
-     * @return int
-     */
-    public function getId()
+    public function __construct(array $row)
     {
-        return $this->id;
+        [
+            $this->network,
+            $this->resCom,
+            $this->codResf,
+            $this->resStif,
+            $this->exploitant,
+            $this->numPsr,
+            $this->idf,
+            $this->principal,
+            $this->absc,
+            $this->ord,
+        ] = $row;
     }
 
     /**
@@ -305,25 +273,4 @@ class Network
         return $this;
     }
 
-    /**
-     * @return Location
-     */
-    public function getLocation()
-    {
-        return $this->location;
-    }
-
-    /**
-     * @param Location $location
-     *
-     * @return self|$this
-     */
-    public function setLocation(Location $location)
-    {
-        $this->location = $location;
-
-        return $this;
-    }
-
 }
-
